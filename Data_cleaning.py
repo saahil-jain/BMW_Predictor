@@ -176,3 +176,32 @@ def clean_prices(df):
     result = df
 
     return result
+
+def get_age(df):
+  manufacture_years = df["YearOfManufacture"].values
+  selling_dates = df["Date"].values
+  age = []
+  for manufacture_year,selling_date in zip(manufacture_years, selling_dates):
+    age.append(selling_date.astype('datetime64[Y]').astype(int) + 1970 - int(manufacture_year))
+
+  df["Age"]=age
+  df = df.drop(columns=['Date'])
+  return df
+
+def clean_location(df):
+
+  if "Location" not in df.columns:
+      return df
+  raw_locations = df["Location"].values
+  countries = []
+  for location in raw_locations:
+    if "Location" not in df.columns:
+        return df
+    if str(location)!="nan":
+      country = location.split(",")[-1].strip()
+      countries.append(country)
+    else:
+      countries.append("Outside")
+  df["Country"]=countries
+  df = df.drop(columns=['Location'])
+  return df
