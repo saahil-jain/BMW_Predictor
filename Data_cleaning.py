@@ -1,9 +1,9 @@
 import pandas as pd
 import numpy as np
-import os
 import re 
 
 def clean_features(df, fillna=False):
+    import numpy as np
     if "Features" not in df.columns:
         return df
     features = df["Features"].values
@@ -69,10 +69,12 @@ def clean_features(df, fillna=False):
     return result
 
 def clean_date(df):
+    import pandas as pd
     df["Date"] = pd.to_datetime(df["Date"])
     return df
 
 def clean_name(df):
+    import numpy as np
     if "Name" not in df.columns:
         return df
     first_column=df.loc[:,"Name"]
@@ -94,6 +96,7 @@ def clean_name(df):
     return df
 
 def binarize_auctiontype(df):
+    import numpy as np
     if "Auction_Type" not in df.columns:
         return df
     auction_column=df.loc[:,"Auction_Type"]
@@ -111,6 +114,7 @@ def binarize_auctiontype(df):
     return df
 
 def binarize_transmission(df):
+    import numpy as np
     if "Transmission" not in df.columns:
         return df
     auction_column=df.loc[:,"Transmission"]
@@ -128,6 +132,7 @@ def binarize_transmission(df):
     return df
 
 def binarize_drive_side(df):
+    import numpy as np
     if "Drive_Side" not in df.columns:
         return df
     auction_column=df.loc[:,"Drive_Side"]
@@ -145,7 +150,8 @@ def binarize_drive_side(df):
     return df
 
 def clean_prices(df):
-    
+    import numpy as np
+    import re 
     pound = 1.2064 
     euros = 1.04
     regex = '\d+'
