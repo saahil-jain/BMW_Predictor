@@ -78,8 +78,15 @@ def clean_name(df):
     col=first_column.to_numpy(dtype=object)
     year=[]
     nameCleaned=[]
+    cabriolet = []
+    coupe = []
+    gt = []
     for item in col:
         if item!="":
+            name = item.lower()
+            cabriolet.append(1 if "cabriolet" in name else 0)
+            coupe.append(1 if "coupe" in name else 0)
+            gt.append(1 if "gt" in name else 0)
             itemsinList=item.split(" ")
             year.append(itemsinList[0])
             # print(item, itemsinList)
@@ -89,6 +96,9 @@ def clean_name(df):
             nameCleaned.append(np.nan)
     df["NameOfModel"]=nameCleaned
     df["YearOfManufacture"]=year
+    df["Cabriolet"]=cabriolet
+    df["Coupe"]=coupe
+    df["GT"]=gt
     df = df.drop(columns=['Name'])
     return df
 
